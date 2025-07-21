@@ -2,7 +2,7 @@
  * gear_shifter.c
  *
  *  Created on: 17-Jul-2025
- *      Author: 91626
+ *      Author: Rohit
  */
 #include "sdk_project_config.h"
 #include "gear_shifter.h"
