@@ -6,6 +6,9 @@
  */
 #include "sdk_project_config.h"
 #include "gear_shifter.h"
+#include "gpio.h"
+#include "interrupt_manager.h"
+
 
 uint32_t int_status;
 extern uint8_t gear_state;
@@ -28,10 +31,10 @@ void Gear_Interrupt_init()
 	PINS_DRV_SetPinIntSel(BTN_PORTB, BTN5_PIN, PORT_INT_FALLING_EDGE);
 
 	/* Install buttons ISR for portE */
-	INT_SYS_InstallHandler(PORTE_IRQn, &buttonE_ISR, NULL);//install interrupt hdlr for porte
+	INT_SYS_InstallHandler(PORTE_IRQn, &PortE_ISR, NULL);//install interrupt hdlr for porte
 
 	/* Install buttons ISR for portB */
-	INT_SYS_InstallHandler(PORTB_IRQn, &buttonB_ISR, NULL);//install interrupt hdlr for portb
+	INT_SYS_InstallHandler(PORTB_IRQn, &PortB_ISR, NULL);//install interrupt hdlr for portb
 
 	/* Enable buttons interrupt */
 	INT_SYS_EnableIRQ(PORTE_IRQn);//enable interrupt for porte
@@ -41,7 +44,7 @@ void Gear_Interrupt_init()
 
 }
 
-void buttonE_ISR()
+void PortE_ISR()
 {
   printf("portE ISR invoked\n");//ISR for PE15(sports/eco mode)
 
@@ -56,7 +59,7 @@ void buttonE_ISR()
   PINS_DRV_ClearPortIntFlagCmd(BTN_PORTE);
 }
 
-void buttonB_ISR()
+void PortB_ISR()
 {
 	printf("portB ISR invoked\n");
 	/**Check isfr REGISTER for portb, to know which button has been pressed*/

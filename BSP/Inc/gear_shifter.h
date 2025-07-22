@@ -19,15 +19,6 @@
 #define MC_FORWARD_STATE  			0x05
 #define MC_PARKING_STATE     		0x04
 
-#define BTN1_PIN        15U //to select mode
-#define BTN2_PIN        8U// drive
-#define BTN3_PIN        9U//neutral
-#define BTN4_PIN        10U//reverse
-#define BTN5_PIN        11U//parking
-
-
-#define BTN_PORTB						PORTB
-#define BTN_PORTE						PORTE
 
 #endif /* INC_GEAR_SHIFTER_H_ */
 typedef enum{
@@ -48,7 +39,8 @@ typedef enum{
 	ON =0,
 	OFF//brake is active low
 }brake_state;
+
 void drive_state_change(void);
 void Gear_Interrupt_init(void);
-void buttonE_ISR(void);
-void buttonB_ISR(void);
+void PortE_ISR(void);
+void PortB_ISR(void);

@@ -8,6 +8,8 @@
 #ifndef INC_CAN_H_
 #define INC_CAN_H_
 
+#include "sdk_project_config.h"
+
 void FlexCANInit(void);
 void SendCANData(uint32_t mailbox, uint32_t messageId, uint8_t * data, uint32_t len);
 void CAN_ReceiveConfig1(void);

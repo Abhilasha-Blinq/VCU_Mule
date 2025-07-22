@@ -62,17 +62,12 @@ int main(void)
 
 	GPIO_Init();
 
-	Gear_Interrupt_init();
-
-	FlexCANInit();
-
 	PDB1_Trigger_Timer_Init();
 
 	ADC_Init();
 
 	if(!calculateIntValue(&pdb_config_1_timerConfig0, PDLY_TIMEOUT, &delayValue))
 		{
-
 			while(1);
 		}
 
@@ -84,15 +79,7 @@ int main(void)
 
 	 TRGMUX_DRV_Init(INST_TRGMUX, &trgmux1_InitConfig0);
 
-	 CAN_ReceiveConfig1();
-
-	 CAN_ReceiveConfig2();
-
-	 CAN_ReceiveConfig3();
-
-	 CAN_ReceiveConfig4();
-
-	 CAN_ReceiveConfig5();
+	 Start_Button_Init();
 
 	//LPIT_Init();
 
