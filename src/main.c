@@ -14,7 +14,6 @@
 
 /* Including necessary configuration files. */
 #include "sdk_project_config.h"
-#include "CAN.h"
 
 volatile int exit_code = 0;
 
@@ -27,6 +26,7 @@ volatile int exit_code = 0;
 #include "gpio.h"
 #include "timer.h"
 #include "dma.h"
+#include "CAN.h"
 
 #define PDLY_TIMEOUT 	30UL
 #define TX_MAILBOX  	(1UL)
