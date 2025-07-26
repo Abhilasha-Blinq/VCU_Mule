@@ -155,6 +155,9 @@ void DMA_Callback(void *parameter, edma_chn_status_t status)
 
 	if(drive_status == P || drive_status == N)
 	{
+		/**Disable reverse light*/
+		PINS_DRV_ClearPins(PTE, 1 << 9);
+
 		throttle_data = 0;
 		mc_cmd[0] =MC_PARKING_STATE;
 		mc_cmd[1] = 0x00;//Reserved
@@ -164,6 +167,9 @@ void DMA_Callback(void *parameter, edma_chn_status_t status)
 
 	else if(drive_status == D)
 	{
+		/**Disable reverse light*/
+		PINS_DRV_ClearPins(PTE, 1 << 9);
+
 		throttle_data = (((map_result1 + map_result2)/2)*2.56);
 		mc_cmd[0] =MC_FORWARD_STATE;
 		mc_cmd[1] = 0x00;//Reserved
@@ -172,7 +178,10 @@ void DMA_Callback(void *parameter, edma_chn_status_t status)
 	}
 	else if(drive_status == R)
 	{
-		throttle_data =(((map_result1 + map_result2)/2)*2.56);//(((map_result1 + map_result2)/5));
+		/**Enable reverse light*/
+		PINS_DRV_SetPins(PTE, 1 << 9);
+
+		throttle_data =(((map_result1 + map_result2)/5));
 		mc_cmd[0] = MC_BACKWARD_STATE;
 		mc_cmd[1] = 0x00;//Reserved
 		mc_cmd[2] = 0x40;//Reverse direction
